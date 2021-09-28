@@ -1,0 +1,8 @@
+{
+    company {
+        ceo
+        coo
+        employees
+        name
+    }
+}

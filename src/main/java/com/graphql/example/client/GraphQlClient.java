@@ -7,7 +7,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.hamcrest.Condition;
+import com.graphql.example.response.GraphQLResponse;
 
 public class GraphQlClient {
 
@@ -27,18 +27,18 @@ public class GraphQlClient {
                 .post(url);
     }
 
-    public Response executeQuery(GraphQlQuery query){
-        return requestSpecification
+    public GraphQLResponse executeQuery(GraphQlQuery query){
+        return new GraphQLResponse(requestSpecification
                 .body(query)
-                .post(url);
+                .post(url));
     }
 
-    public Response executeGql(String fileName){
+    public GraphQLResponse executeGql(String fileName){
         var graphQlQuery = GQLUtils.readGql(fileName);
         return executeQuery(graphQlQuery);
     }
 
-    public Response executeGql(String fileName, Object variables){
+    public GraphQLResponse executeGql(String fileName, Object variables){
         var graphQlQuery = GQLUtils.readGql(fileName, variables);
         return executeQuery(graphQlQuery);
     }
